@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina | Home</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body class="light"> <!-- Default class, script will override if saved pref exists -->
+    <header>
+        <a href="index.html" class="brand">Lumina</a>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="create/create.html">Cadastrar</a>
+            <a href="products/products.html">Lista</a>
+        </nav>
+        <button id="theme-toggle" aria-label="Alternar Tema Escuro">🌙 Modo Escuro</button>
+    </header>
+
+    <main>
+        <h1 class="slogan">Elegância em cada detalhe.</h1>
+
+        <div class="cards-container">
+            <a href="create/create.html" class="card">
+                <h2>Cadastrar Novo Produto</h2>
+                <p>Adicione uma nova peça à sua lista exclusiva. Defina os padrões de beleza e funcionalidade.</p>
+            </a>
+
+            <a href="products/products.html" class="card">
+                <h2>Ver Lista</h2>
+                <p>Explore todos os itens requintados atualmente em seu catálogo. Gerencie e revise com facilidade.</p>
+            </a>
+        </div>
+    </main>
+
+    <script src="theme.js"></script>
+</body>
+
+</html>

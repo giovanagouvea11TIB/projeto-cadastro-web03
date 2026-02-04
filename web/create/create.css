@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+:root {
+    /* Light Theme - White Bg, Pink Details */
+    --bg-color-light: #ffffff;
+    --text-color-light: #334155;
+    --primary-color: #db2777;
+    /* Pink 600 */
+    --primary-hover: #be185d;
+    --input-bg-light: #f8fafc;
+    --card-bg-light: #ffffff;
+    --header-bg-light: rgba(255, 255, 255, 0.95);
+    --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+    /* Dark Theme - Darker Bg, Serious Colors */
+    --bg-color-dark: #020617;
+    /* Slate 950 */
+    --text-color-dark: #cbd5e1;
+    --input-bg-dark: #1e293b;
+    /* Slate 800 */
+    --card-bg-dark: #0f172a;
+    /* Slate 900 */
+    --header-bg-dark: rgba(2, 6, 23, 0.9);
+    --shadow-dark: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+
+    /* Dark Mode Feminine Overrides */
+    --primary-color-dark-theme: #fda4af;
+    /* Rose 300 */
+    --primary-hover-dark-theme: #fb7185;
+    /* Rose 400 */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.light {
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
+    --input-bg: var(--input-bg-light);
+    --card-bg: var(--card-bg-light);
+    --header-bg: var(--header-bg-light);
+    --shadow: var(--shadow-light);
+}
+
+body.dark {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+    --input-bg: var(--input-bg-dark);
+    --card-bg: var(--card-bg-dark);
+    --header-bg: var(--header-bg-dark);
+    --shadow: var(--shadow-dark);
+
+    /* Neutral Override */
+    --primary-color: var(--primary-color-dark-theme);
+    --primary-hover: var(--primary-hover-dark-theme);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(8px);
+    background-color: var(--header-bg);
+    z-index: 100;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.brand {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    color: var(--primary-color);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+#theme-toggle {
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: inherit;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-color-light);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+body.dark nav a {
+    color: var(--text-color-dark);
+}
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
+/* Dark Mode Input Highlight */
+body.dark input,
+body.dark textarea,
+body.dark select {
+    border-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(30, 41, 59, 0.6);
+    /* Slightly transparent */
+}
+
+body.dark input:focus,
+body.dark textarea:focus,
+body.dark select:focus {
+    border-color: #8b5cf6;
+    /* Highlight color */
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
+    /* Glow effect */
+}
+
+#theme-toggle:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+main {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+form {
+    background-color: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+input,
+textarea,
+select {
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    border: 2px solid transparent;
+    background-color: var(--input-bg);
+    color: inherit;
+    font-family: inherit;
+    transition: all 0.2s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: transparent;
+}
+
+button[type="submit"] {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 1rem;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--primary-hover);
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--text-color-light);
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+body.dark .back-link {
+    color: var(--text-color-dark);
+}
+
+.back-link:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
