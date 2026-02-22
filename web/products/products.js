@@ -31,6 +31,11 @@ async function loadProducts() {
             card.innerHTML = `
                 <div class="card-header">
                     <h2 class="product-name">${escapeHtml(product.name)}</h2>
+                    <button class="delete-btn" onclick="deleteProduct(${product.id})" aria-label="Deletar produto">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <div class="card-price-row">
                     <span class="product-price">${priceFormatted}</span>
                 </div>
                 <div class="product-category">${escapeHtml(product.category)}</div>
@@ -46,6 +51,28 @@ async function loadProducts() {
         container.innerHTML = '<p class="loading">Erro ao carregar a coleção. Verifique se o servidor está rodando.</p>';
     }
 }
+
+async function deleteProduct(id) {
+    if (!confirm('Deseja realmente apagar este produto?')) return;
+
+    try {
+        const response = await fetch(`http://localhost:3000/products/${id}`, {
+            method: 'DELETE'
+        });
+
+        if (response.ok) {
+            alert('Produto apagado com sucesso!');
+            loadProducts(); // Refresh the list
+        } else {
+            const error = await response.json();
+            alert('Erro ao apagar produto: ' + error.message);
+        }
+    } catch (error) {
+        console.error('Erro ao deletar:', error);
+        alert('Erro ao conectar com o servidor.');
+    }
+}
+
 
 // Simple XSS protection helper
 function escapeHtml(text) {

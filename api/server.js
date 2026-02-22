@@ -1,48 +1,56 @@
 import express from 'express'
 import cors from 'cors'
-import mysql from 'mysql2'
+import mysql2 from 'mysql2/promise'
 
 const app = express()
 
 app.use(express.json())
 app.use(cors())
 
-const connection = mysql.createConnection({
+const pool = mysql2.createPool({
     host: 'benserverplex.ddns.net',
     user: 'alunos',
     password: 'senhaAlunos',
-    database: 'web_03mb'
+    database: 'web_03mb',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 })
 
-connection.connect((err) => {
-    if (err) {
-        console.error('Erro ao conectar no banco de dados: ' + err.stack)
-        return
-    }
-    console.log('Conectado como id ' + connection.threadId)
-})
-
-app.post('/products', (req, res) => {
+app.post('/products', async (req, res) => {
     const { name, price, description, category } = req.body
     const sql = 'INSERT INTO `3mb_0giovana_gouvea` (name, price, description, category) VALUES (?, ?, ?, ?)'
-    connection.query(sql, [name, price, description, category], (err, results) => {
-        if (err) {
-            res.status(500).json({ message: 'Erro ao salvar produto', error: err })
-        } else {
-            res.status(201).json({ message: 'Produto salvo com sucesso', id: results.insertId })
-        }
-    })
+    try {
+        const [results] = await pool.query(sql, [name, price, description, category])
+        res.status(201).json({ message: 'Produto salvo com sucesso', id: results.insertId })
+    } catch (err) {
+        res.status(500).json({ message: 'Erro ao salvar produto', error: err.message })
+    }
 })
 
-app.get('/products', (req, res) => {
-    const sql = 'SELECT name, price, description, category FROM `3mb_0giovana_gouvea`'
-    connection.query(sql, (err, results) => {
-        if (err) {
-            res.status(500).json({ message: 'Erro ao buscar produtos', error: err })
+app.get('/products', async (req, res) => {
+    const sql = 'SELECT id, name, price, description, category FROM `3mb_0giovana_gouvea`'
+    try {
+        const [results] = await pool.query(sql)
+        res.status(200).json(results)
+    } catch (err) {
+        res.status(500).json({ message: 'Erro ao buscar produtos', error: err.message })
+    }
+})
+
+app.delete('/products/:id', async (req, res) => {
+    const { id } = req.params
+    const sql = 'DELETE FROM `3mb_0giovana_gouvea` WHERE id = ?'
+    try {
+        const [results] = await pool.query(sql, [id])
+        if (results.affectedRows > 0) {
+            res.status(200).json({ message: 'Produto deletado com sucesso' })
         } else {
-            res.status(200).json(results)
+            res.status(404).json({ message: 'Produto não encontrado' })
         }
-    })
+    } catch (err) {
+        res.status(500).json({ message: 'Erro ao deletar produto', error: err.message })
+    }
 })
 
 app.listen(3000, () => {
