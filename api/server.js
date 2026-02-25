@@ -38,6 +38,37 @@ app.get('/products', async (req, res) => {
     }
 })
 
+app.get('/products/:id', async (req, res) => {
+    const { id } = req.params
+    const sql = 'SELECT id, name, price, description, category FROM `3mb_0giovana_gouvea` WHERE id = ?'
+    try {
+        const [results] = await pool.query(sql, [id])
+        if (results.length > 0) {
+            res.status(200).json(results[0])
+        } else {
+            res.status(404).json({ message: 'Produto não encontrado' })
+        }
+    } catch (err) {
+        res.status(500).json({ message: 'Erro ao buscar produto', error: err.message })
+    }
+})
+
+app.put('/products/:id', async (req, res) => {
+    const { id } = req.params
+    const { name, price, description, category } = req.body
+    const sql = 'UPDATE `3mb_0giovana_gouvea` SET name = ?, price = ?, description = ?, category = ? WHERE id = ?'
+    try {
+        const [results] = await pool.query(sql, [name, price, description, category, id])
+        if (results.affectedRows > 0) {
+            res.status(200).json({ message: 'Produto atualizado com sucesso' })
+        } else {
+            res.status(404).json({ message: 'Produto não encontrado' })
+        }
+    } catch (err) {
+        res.status(500).json({ message: 'Erro ao atualizar produto', error: err.message })
+    }
+})
+
 app.delete('/products/:id', async (req, res) => {
     const { id } = req.params
     const sql = 'DELETE FROM `3mb_0giovana_gouvea` WHERE id = ?'

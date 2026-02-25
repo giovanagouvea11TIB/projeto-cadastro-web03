@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+:root {
+    --bg-color-light: #ffffff;
+    --text-color-light: #334155;
+    --primary-color: #db2777;
+    --primary-hover: #be185d;
+    --card-bg-light: #ffffff;
+    --header-bg-light: rgba(255, 255, 255, 0.95);
+    --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --border-light: #e2e8f0;
+
+    --bg-color-dark: #020617;
+    --text-color-dark: #cbd5e1;
+    --card-bg-dark: #0f172a;
+    --header-bg-dark: rgba(2, 6, 23, 0.9);
+    --shadow-dark: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    --border-dark: #1e293b;
+
+    --primary-color-dark-theme: #fda4af;
+    --primary-hover-dark-theme: #fb7185;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.light {
+    background-color: var(--bg-color-light);
+    color: var(--text-color-light);
+    --card-bg: var(--card-bg-light);
+    --header-bg: var(--header-bg-light);
+    --shadow: var(--shadow-light);
+    --border: var(--border-light);
+}
+
+body.dark {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-dark);
+    --card-bg: var(--card-bg-dark);
+    --header-bg: var(--header-bg-dark);
+    --shadow: var(--shadow-dark);
+    --border: var(--border-dark);
+    --primary-color: var(--primary-color-dark-theme);
+    --primary-hover: var(--primary-hover-dark-theme);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 6vw;
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(8px);
+    background-color: var(--header-bg);
+    z-index: 100;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.brand {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    color: var(--primary-color);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
+#theme-toggle {
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: inherit;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+#theme-toggle:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+main {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+#edit-form {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+input,
+textarea {
+    background-color: transparent;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: inherit;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.1);
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+button[type="submit"] {
+    flex: 2;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--primary-hover);
+}
+
+button[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+.cancel-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.cancel-btn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.dark .cancel-btn:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 2rem;
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.back-link:hover {
+    opacity: 1;
+    text-decoration: underline;
+}

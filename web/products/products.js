@@ -31,9 +31,14 @@ async function loadProducts() {
             card.innerHTML = `
                 <div class="card-header">
                     <h2 class="product-name">${escapeHtml(product.name)}</h2>
-                    <button class="delete-btn" onclick="deleteProduct(${product.id})" aria-label="Deletar produto">
-                        <i class="fas fa-trash"></i>
-                    </button>
+                    <div class="card-actions">
+                        <button class="edit-btn" onclick="goToEdit(${product.id})" aria-label="Editar produto">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="delete-btn" onclick="deleteProduct(${product.id})" aria-label="Deletar produto">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="card-price-row">
                     <span class="product-price">${priceFormatted}</span>
@@ -71,6 +76,10 @@ async function deleteProduct(id) {
         console.error('Erro ao deletar:', error);
         alert('Erro ao conectar com o servidor.');
     }
+}
+
+function goToEdit(id) {
+    window.location.href = `../edit/edit.html?id=${id}`;
 }
 
 
